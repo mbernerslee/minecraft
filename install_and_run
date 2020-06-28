@@ -4,7 +4,8 @@
 
 download_url="https://launcher.mojang.com/v1/objects/a412fd69db1f81db3f511c1463fd304675244077/server.jar"
 minecraft_server_file_name="server.jar"
-installation_path="~/minecraft"
+installation_path="$HOME/minecraft"
+this_dir=""
 
 function install_java {
   sudo apt install default-jre -y
@@ -23,7 +24,8 @@ function install_beautifier_prerequisites {
 }
 
 function run_minecraft_server {
-  ./run $minecraft_server_file_name
+  echo "$this_dir/run"
+  "$this_dir/run" $minecraft_server_file_name
 }
 
 function agree_to_eula {
@@ -35,8 +37,9 @@ function uninstall {
 }
 
 function create_install_dir {
-  if [ -d $installation_path ]; then
-    mkdir $installation_path
+  this_dir="$(pwd)"
+  if [ ! -d $installation_path ]; then
+    mkdir "$installation_path"
   fi
   pushd .
   cd $installation_path
