@@ -1,0 +1,9 @@
+#!/bin/bash
+
+default="~/minecraft/server.jar"
+
+if [ "$1" = "" ]; then
+  java -Xmx1024M -Xms1024M -jar "$default" --nogui
+else
+  java -Xmx1024M -Xms1024M -jar "$1" --nogui
+fi
