@@ -1,0 +1,12 @@
+#!/bin/bash
+
+session_name="minecraft"
+
+sessions=$(tmux ls)
+echo $sessions
+
+if [[ $sessions == *"$session_name"* ]]; then
+  tmux a -t $session_name
+else
+  tmux new -s $session_name -d ./run
+fi

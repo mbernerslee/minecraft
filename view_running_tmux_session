@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. ./beautifier
+
+session_name="minecraft"
+
+sessions=$(tmux ls)
+
+if [[ $sessions == *"$session_name"* ]]; then
+  tmux a -t $session_name
+else
+  log_failure "The server is not running in the tmux session '$session_name'"
+fi
+
