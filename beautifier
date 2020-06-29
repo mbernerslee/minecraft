@@ -34,12 +34,16 @@ run_clean() {
 
 run_verbose() {
   echo ""
-  log_info "------------------------------------------------\n"
-  log_info "Running \"$action\"\n"
-  log_info "------------------------------------------------\n"
+  log_running $action
   eval $action
   result=$?
   output=""
+}
+
+log_running() {
+  log_info "------------------------------------------------\n"
+  log_info "Running \"$1\"\n"
+  log_info "------------------------------------------------\n"
 }
 
 run_action() {
