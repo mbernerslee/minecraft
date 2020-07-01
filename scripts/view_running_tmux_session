@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./beautifier
+. ./scripts/beautifier
 
 session_name="minecraft"
 

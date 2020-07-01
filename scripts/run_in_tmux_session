@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./scripts/beautifier
+
 session_name="minecraft"
 
 sessions=$(tmux ls)
@@ -8,5 +10,6 @@ echo $sessions
 if [[ $sessions == *"$session_name"* ]]; then
   tmux a -t $session_name
 else
-  tmux new -s $session_name -d ./run
+  log_info "Running minecraft in tmux session '$session_name'\n"
+  tmux new -s $session_name -d ./scripts/run
 fi

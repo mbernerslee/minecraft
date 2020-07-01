@@ -20,8 +20,8 @@ function install_beautifier_prerequisites {
 }
 
 function run_minecraft_server {
-  ./run_in_tmux_session
-  ./view_running_tmux_session
+  ./scripts/run_in_tmux_session
+  ./scripts/view_running_tmux_session
 }
 
 function agree_to_eula {
@@ -40,7 +40,7 @@ function log_pwd {
 }
 
 install_beautifier_prerequisites
-. ./beautifier
+. ./scripts/beautifier
 
 run_action install_java
 run_action install_minecraft_server
