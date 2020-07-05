@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
 ### BEGIN INIT INFO
 # Provides:	minecraft
@@ -9,50 +10,30 @@
 # Short-Description:	Minecraft server
 ### END INIT INFO
 
+cd /home/admin/src/minecraft/
 
-session_name="minecraft"
-
-function start {
-  pushd . >/dev/null
-  cd /home/admin/src/minecraft/ >/dev/null
-  echo "Starting minecraft server..."
-  ./scripts/run_in_tmux_session
-  popd >/dev/null
+start() {
+  ./scripts/start
 }
 
-function stop {
-  if [[ $(tmux ls) == *"$session_name"* ]]; then
-    echo "Sending command to stop mineract server..."
-    tmux send-keys -t $session_name.0 "stop" ENTER
-  else
-    echo "Minecraft server is not running"
-  fi
-
-  while [[ $(tmux ls) == *"$session_name"* ]]
-  do
-    echo "Waiting for minecraft server to stop..."
-    sleep 0.5
-  done
-  echo "Minecraft server has stopped"
+stop() {
+  ./scripts/stop
 }
 
-function restart {
+restart() {
   stop
   start
 }
 
-function force-reload {
+force_reload() {
   restart
 }
 
-function status {
-  if [[ $(tmux ls) == *"$session_name"* ]]; then
-    echo "Minecraft server is running"
-    exit 0
-  else
-    echo "Minecraft server is not running"
-    exit 3
+status() {
+  ./scripts/status
 }
+
+echo "The first argument is $1"
 
 case "$1" in
   start)
@@ -65,9 +46,12 @@ case "$1" in
     restart
     ;;
   force-reload)
-    force-reload
+    force_reload
     ;;
   status)
     status
+    ;;
+  *)
+    echo "Usage: init.d.script {start|stop|restart|force-reload|status}"
     ;;
 esac

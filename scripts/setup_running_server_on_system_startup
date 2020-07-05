@@ -1,3 +1,10 @@
 #!/bin/bash
 
-cp ./scripts/init.d.script /etc/init.d/minecraft
+. ./scripts/beautifier
+
+sudo echo "a prompt for sudo" >/dev/null
+run_action "sudo cp ./scripts/init.d.script /etc/init.d/minecraft"
+run_action "sudo update-rc.d minecraft defaults"
+
+#sudo cp ./scripts/init.d.script /etc/init.d/minecraft
+#sudo update-rc.d minecraft defaults

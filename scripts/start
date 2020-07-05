@@ -4,12 +4,9 @@
 
 session_name="minecraft"
 
-sessions=$(tmux ls)
-echo $sessions
-
-if [[ $sessions == *"$session_name"* ]]; then
+if [[ $(sudo -u admin tmux ls) == *"$session_name"* ]]; then
   tmux a -t $session_name
 else
   log_info "Running minecraft in tmux session '$session_name'\n"
-  tmux new -s $session_name -d ./scripts/run
+  run_action "sudo -u admin tmux new -s $session_name -d ./scripts/run"
 fi

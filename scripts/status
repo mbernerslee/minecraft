@@ -1,0 +1,13 @@
+#!/bin/bash
+
+. ./scripts/beautifier
+
+session_name="minecraft"
+
+if [[ $(tmux ls) == *"$session_name"* ]]; then
+  log_info "minecraft server is running\n"
+  exit 0
+else
+  log_info "minecraft server is not running\n"
+  exit 3
+fi
