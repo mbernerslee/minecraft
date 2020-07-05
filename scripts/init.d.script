@@ -1,0 +1,73 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:	minecraft
+# Required-Start:	networking
+# Required-Stop:	networking
+# Default-Start:	2 3 4 5
+# Default-Stop:
+# Short-Description:	Minecraft server
+### END INIT INFO
+
+
+session_name="minecraft"
+
+function start {
+  pushd . >/dev/null
+  cd /home/admin/src/minecraft/ >/dev/null
+  echo "Starting minecraft server..."
+  ./scripts/run_in_tmux_session
+  popd >/dev/null
+}
+
+function stop {
+  if [[ $(tmux ls) == *"$session_name"* ]]; then
+    echo "Sending command to stop mineract server..."
+    tmux send-keys -t $session_name.0 "stop" ENTER
+  else
+    echo "Minecraft server is not running"
+  fi
+
+  while [[ $(tmux ls) == *"$session_name"* ]]
+  do
+    echo "Waiting for minecraft server to stop..."
+    sleep 0.5
+  done
+  echo "Minecraft server has stopped"
+}
+
+function restart {
+  stop
+  start
+}
+
+function force-reload {
+  restart
+}
+
+function status {
+  if [[ $(tmux ls) == *"$session_name"* ]]; then
+    echo "Minecraft server is running"
+    exit 0
+  else
+    echo "Minecraft server is not running"
+    exit 3
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  force-reload)
+    force-reload
+    ;;
+  status)
+    status
+    ;;
+esac
