@@ -7,6 +7,19 @@ function install_tmux {
   sudo apt install tmux -y
 }
 
+function install_aws_cli {
+  dpkg -l | grep awscli
+  if [[ $? -eq 0 ]]; then
+    echo "aws cli already installed"
+  else
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+    rm -r aws/
+    rm awscliv2.zip
+  fi
+}
+
 echo_show_terraform_message=1
 
 function install_terraform {
@@ -38,6 +51,7 @@ function install_terraform {
 }
 
 run_action install_tmux
+run_action install_aws_cli
 run_action install_terraform
 
 if [[ $echo_show_terraform_message -eq 0 ]]; then
