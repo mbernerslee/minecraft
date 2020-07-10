@@ -3,6 +3,9 @@
 # Prioritised
 
 - make all boxes terraformable
+  - add all needed resources to minecraft main.tf
+    - security groups
+    - other?
 - webserver logins
 - webserver can check minecraft server: if the box is powered on
 - allow the webserver to make calls to minecraft server to turn it on
@@ -18,3 +21,5 @@
 - allow the webserver to make calls to minecraft server to turn it off
 - check that minecraft server powers of gracefully when the box is powered off
 - allow the webserver to make calls to minecraft server to check its status
+
+# Done stuff (woop)
