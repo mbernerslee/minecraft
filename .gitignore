@@ -12,3 +12,4 @@ usercache.json
 whitelist.json
 world/
 **/.terraform/*
+terraform/
