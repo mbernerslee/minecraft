@@ -1,0 +1,45 @@
+#!/bin/bash
+
+. ./scripts/beautifier
+
+
+function install_tmux {
+  sudo apt install tmux -y
+}
+
+echo_show_terraform_message=1
+
+function install_terraform {
+  install_dir="$HOME/.bin"
+  install_file_path="$HOME/.bin/terraform"
+  export_install_dir="export PATH=\$PATH:$install_dir"
+
+  mkdir -p $install_dir
+
+  grep "$export_install_dir" ~/.bashrc
+  if [[ $? -eq 0  ]]; then
+    echo "$install_dir already exists in \$PATH"
+  else
+    echo "adding $install_dir to \$PATH"
+    echo "$export_install_dir" >> ~/.bashrc
+    echo_show_terraform_message=$((0))
+  fi
+
+  if [[ -f "$install_file_path" ]]; then
+    echo "terraform is already present at $install_file_path"
+  else
+    echo "downloading terraform"
+    wget https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+    unzip terraform_0.12.28_linux_amd64.zip
+    echo "moving terraform to $install_file_path"
+    mv terraform "$install_dir"
+    rm terraform_0.12.28_linux_amd64.zip
+  fi
+}
+
+run_action install_tmux
+run_action install_terraform
+
+if [[ $echo_show_terraform_message -eq 0 ]]; then
+  log_success "Please now run 'source ~/.bashrc' to be able to run 'terraform'\n"
+fi

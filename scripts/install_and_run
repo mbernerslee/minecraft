@@ -3,6 +3,10 @@
 download_url="https://launcher.mojang.com/v1/objects/a412fd69db1f81db3f511c1463fd304675244077/server.jar"
 minecraft_server_file_name="server.jar"
 
+function install_tmux {
+  sudo apt install tmux -y
+}
+
 function install_java {
   sudo apt install default-jre -y
 }
@@ -42,6 +46,7 @@ function log_pwd {
 install_beautifier_prerequisites
 . ./scripts/beautifier
 
+run_action install_tmux
 run_action install_java
 run_action install_minecraft_server
 run_action agree_to_eula

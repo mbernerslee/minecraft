@@ -1,0 +1,20 @@
+#TODO List
+
+# Prioritised
+
+- make all boxes terraformable
+- webserver logins
+- webserver can check minecraft server: if the box is powered on
+- allow the webserver to make calls to minecraft server to turn it on
+- add a script to the minecraft server to poweroff if no players are online, checking every 30 min or so
+
+
+
+# Unprioritised
+
+- webserver can check minecraft server: if minecraft server is running on the box
+- webserver can check minecraft server: number of players online
+- webserver can check minecraft server: name of players online
+- allow the webserver to make calls to minecraft server to turn it off
+- check that minecraft server powers of gracefully when the box is powered off
+- allow the webserver to make calls to minecraft server to check its status
