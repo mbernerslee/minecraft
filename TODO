@@ -3,6 +3,7 @@
 # Prioritised
 
 - make all boxes terraformable
+  - add security group (and rename it to sth sensible) to minecraft
 - webserver logins
 - webserver can check minecraft server: if the box is powered on
 - allow the webserver to make calls to minecraft server to turn it on

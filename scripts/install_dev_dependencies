@@ -1,13 +1,22 @@
 #!/bin/bash
 
-. ./scripts/beautifier
-
-
 function install_tmux {
   sudo apt install tmux -y
 }
 
 echo_show_terraform_message=1
+
+function install_aws_cli {
+  dpkg -l | grep aws
+  if [[ $? -eq 0 ]]; then
+    echo "aws cli already installed"
+  else
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+    rm awscliv2.zip
+  fi
+}
 
 function install_terraform {
   install_dir="$HOME/.bin"
@@ -37,9 +46,18 @@ function install_terraform {
   fi
 }
 
+function install_beautifier_prerequisites {
+  sudo apt install bc -y
+}
+
+install_beautifier_prerequisites
+. ./scripts/beautifier
+
 run_action install_tmux
 run_action install_terraform
 
 if [[ $echo_show_terraform_message -eq 0 ]]; then
   log_success "Please now run 'source ~/.bashrc' to be able to run 'terraform'\n"
 fi
+
+run_action install_aws_cli
