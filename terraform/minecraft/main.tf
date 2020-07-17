@@ -1,5 +1,6 @@
 provider "aws" {
   region = "eu-west-2"
+  profile = "berners_personal"
 }
 
 data "aws_ami" "minecraft_ami" {
@@ -27,46 +28,6 @@ resource "aws_instance" "minecraft" {
 resource "aws_security_group" "minecraft" {
   name   = "minecraft"
   description = "The security group for the minecrafter server machine"
-  #id = "minecraft-security-group-id"
-  #vpc_id = data.aws_vpc.default.id
-
-  egress {
-    cidr_blocks = [ "0.0.0.0/0" ]
-    from_port = 0
-    to_port   = 0
-    security_groups = []
-    protocol = "-1"
-  }
-
-  #ingress {
-  #  cidr_blocks = [ "0.0.0.0/0" ]
-  #  description = "The port minecraft server needs to allow players to connect"
-  #  from_port = 25565
-  #  to_port   = 25565
-  #  protocol        = "TCP"
-  #  security_groups = []
-  #}
-
-  #ingress {
-  #  cidr_blocks = [ "0.0.0.0/0" ]
-  #  description = "ssh"
-  #  from_port = 22
-  #  to_port   = 22
-  #  protocol        = "TCP"
-  #  security_groups = []
-  #}
-  #ingress {
-  #  from_port = 22
-  #  to_port   = 22
-  #  protocol        = "TCP"
-  #  security_groups = [data.aws_security_group.metabase_beanstalk_app_security_group.id]
-  #}
-  #ingress {
-  #  from_port = 5432
-  #  to_port   = 5432
-  #  protocol        = "TCP"
-  #  security_groups = [data.aws_security_group.metabase_beanstalk_app_security_group.id]
-  #}
 }
 
 resource "aws_security_group_rule" "ssh" {
