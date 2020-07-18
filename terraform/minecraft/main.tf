@@ -25,6 +25,11 @@ resource "aws_instance" "minecraft" {
   }
 }
 
+resource "aws_network_interface_sg_attachment" "minecraft" {
+  security_group_id    = aws_security_group.minecraft.id
+  network_interface_id = aws_instance.minecraft.primary_network_interface_id
+}
+
 resource "aws_security_group" "minecraft" {
   name   = "minecraft"
   description = "The security group for the minecrafter server machine"
@@ -64,7 +69,7 @@ resource "aws_security_group_rule" "pings" {
   type = "ingress"
   security_group_id = aws_security_group.minecraft.id
   cidr_blocks = [ "0.0.0.0/0" ]
-  description = "allow elixir phoenix dev on http"
+  description = "allow pings"
   from_port = 8
   to_port   = -1
   protocol  = "icmp"
