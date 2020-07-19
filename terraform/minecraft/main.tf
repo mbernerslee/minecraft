@@ -85,3 +85,13 @@ resource "aws_security_group_rule" "egress_to_anything" {
   protocol          = "-1"
 }
 
+resource "aws_eip" "minecraft" {
+  vpc       = true
+}
+
+
+resource "aws_eip_association" "minecraft" {
+  instance_id   = aws_instance.minecraft.id
+  allocation_id = aws_eip.minecraft.id
+  public_ip = "18.133.55.245"
+}
