@@ -49,7 +49,7 @@ resource "aws_security_group_rule" "player_connections_to_minecraft_server" {
   type              = "ingress"
   security_group_id = aws_security_group.minecraft.id
   cidr_blocks       = [ "0.0.0.0/0" ]
-  description       = "allow minecraft server connections"
+  description       = "minecraft server connections"
   from_port         = 25565
   to_port           = 25565
   protocol          = "TCP"
@@ -59,7 +59,7 @@ resource "aws_security_group_rule" "phoenix_dev" {
   type              = "ingress"
   security_group_id = aws_security_group.minecraft.id
   cidr_blocks       = [ "0.0.0.0/0" ]
-  description       = "allow elixir phoenix dev on http"
+  description       = "elixir phoenix dev on http"
   from_port         = 4000
   to_port           = 4000
   protocol          = "TCP"
@@ -69,7 +69,7 @@ resource "aws_security_group_rule" "pings" {
   type              = "ingress"
   security_group_id = aws_security_group.minecraft.id
   cidr_blocks       = [ "0.0.0.0/0" ]
-  description       = "allow pings"
+  description       = "pings"
   from_port         = 8
   to_port           = -1
   protocol          = "icmp"
@@ -79,7 +79,7 @@ resource "aws_security_group_rule" "egress_to_anything" {
   type              = "egress"
   security_group_id = aws_security_group.minecraft.id
   cidr_blocks       = [ "0.0.0.0/0" ]
-  description       = "allow egress to anything"
+  description       = "egress to anything"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
