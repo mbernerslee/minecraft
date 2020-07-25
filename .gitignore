@@ -11,5 +11,3 @@ server.properties
 usercache.json
 whitelist.json
 world/
-**/.terraform/*
-*.tfstate*
